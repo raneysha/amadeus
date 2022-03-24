@@ -10,11 +10,12 @@ for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.data.name, command);
 }
-client.once('ready', () => {
-	console.log('Ready!');
+client.once('ready', c => {
+	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
-
+ 
 client.on('interactionCreate', async interaction => {
+	console.log(`${interaction.user.tag} triggered an interaction.`);
 	if (!interaction.isCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
